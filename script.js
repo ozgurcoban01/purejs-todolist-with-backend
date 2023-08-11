@@ -2,7 +2,7 @@ const todoInput = document.querySelector(".added-todo").querySelector("input");
 const todoAddButton = document.querySelector(".added-confirm");
 const waitingTodos = document.querySelector(".todos");
 const finishedTodos = document.querySelector(".finished-todos");
-
+const socket=io('ws://localhost:5001')
 let newTodos;
 let newTodosFinishedButton;
 let newTodosDeleteButton;
@@ -29,14 +29,11 @@ if (localStorage.getItem("todosId") == 0) {
 
 }
 
-
-
-
 function newTodoAdd() {
   if (todoInput.value != "") {
     createTodo()
-
   }
+
 }
 
 async function changeTodo(id,title){
@@ -45,7 +42,7 @@ async function changeTodo(id,title){
   }
   console.log(JSON.stringify(newTodo))
   await fetch(
-    "https://todolist-backend-odq2.onrender.com/api/todos/changeTodo/"+id
+    "http://localhost:5001/api/todos/changeTodo/"+id
   ,{
     method:"PUT",
     headers:{          
@@ -54,14 +51,14 @@ async function changeTodo(id,title){
     },
     body : JSON.stringify(newTodo)
   }).then(todoInput.value = "").then(orderAfterFetch)
-
+  socket.emit("message","asd")
 }
 
 async function deleteTodo(id){
 
 
   await fetch(
-    "https://todolist-backend-odq2.onrender.com/api/todos/deleteTodo/"+id
+    "http://localhost:5001/api/todos/deleteTodo/"+id
   ,{
     method:"DELETE",
     headers:{          
@@ -69,7 +66,7 @@ async function deleteTodo(id){
       'Content-Type': 'application/json'
     },
   }).then(todoInput.value = "").then(orderAfterFetch)
-
+  socket.emit("message","asd")
 }
 
 async function setFinishedTodo(id){
@@ -78,7 +75,7 @@ async function setFinishedTodo(id){
   }
  
   await fetch(
-    "https://todolist-backend-odq2.onrender.com/api/todos/changeTodo/"+id
+    "http://localhost:5001/api/todos/changeTodo/"+id
   ,{
     method:"PUT",
     headers:{          
@@ -87,7 +84,7 @@ async function setFinishedTodo(id){
     },
     body : JSON.stringify(newTodoo)
   }).then(todoInput.value = "").then(orderAfterFetch)
-
+  socket.emit('message',"asdasd")
 }
 
 async function createTodo(){
@@ -95,7 +92,7 @@ async function createTodo(){
     title:todoInput.value,
   }
   await fetch(
-    "https://todolist-backend-odq2.onrender.com/api/todos/createTodo"
+    "http://localhost:5001/api/todos/createTodo"
   ,{
     method:"POST",
     headers:{          
@@ -104,12 +101,12 @@ async function createTodo(){
     },
     body : JSON.stringify(newTodo)
   }).then(todoInput.value = "").then(orderAfterFetch)
-
+  socket.emit("message","asd")
 }
 
 async function orderAfterFetch() {
   await fetch(
-    "https://todolist-backend-odq2.onrender.com/api/todos/getAllTodos"
+    "http://localhost:5001/api/todos/getAllTodos"
   ).then((res) => res.json()).then(
     (todos)=>{
       waitingTodos.innerHTML = "";
@@ -160,10 +157,10 @@ async function orderAfterFetch() {
     
   );
 
-
- 
-
-
 }
 
 orderAfterFetch()
+
+socket.on('message',(text)=>{
+orderAfterFetch()
+})
