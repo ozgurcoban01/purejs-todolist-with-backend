@@ -2,12 +2,12 @@ const todoInput = document.querySelector(".added-todo").querySelector("input");
 const todoAddButton = document.querySelector(".added-confirm");
 const waitingTodos = document.querySelector(".todos");
 const finishedTodos = document.querySelector(".finished-todos");
-const socket=io('ws://localhost:5001')
+const socket=io('ws://todolist-backend-odq2.onrender.com')
 let newTodos;
 let newTodosFinishedButton;
 let newTodosDeleteButton;
 let finishedTodosInput;
-
+const API_URL="https://todolist-backend-odq2.onrender.com"
 todoAddButton.addEventListener("click", newTodoAdd);
 
 document.querySelector(".add-todo").addEventListener("keypress", (e) => {
@@ -42,7 +42,7 @@ async function changeTodo(id,title){
   }
   console.log(JSON.stringify(newTodo))
   await fetch(
-    "http://localhost:5001/api/todos/changeTodo/"+id
+    API_URL+"/api/todos/changeTodo/"+id
   ,{
     method:"PUT",
     headers:{          
@@ -58,7 +58,7 @@ async function deleteTodo(id){
 
 
   await fetch(
-    "http://localhost:5001/api/todos/deleteTodo/"+id
+    API_URL+"/api/todos/deleteTodo/"+id
   ,{
     method:"DELETE",
     headers:{          
@@ -75,7 +75,7 @@ async function setFinishedTodo(id){
   }
  
   await fetch(
-    "http://localhost:5001/api/todos/changeTodo/"+id
+    API_URL+"/api/todos/changeTodo/"+id
   ,{
     method:"PUT",
     headers:{          
@@ -92,7 +92,7 @@ async function createTodo(){
     title:todoInput.value,
   }
   await fetch(
-    "http://localhost:5001/api/todos/createTodo"
+    API_URL+"/api/todos/createTodo"
   ,{
     method:"POST",
     headers:{          
@@ -106,7 +106,7 @@ async function createTodo(){
 
 async function orderAfterFetch() {
   await fetch(
-    "http://localhost:5001/api/todos/getAllTodos"
+    API_URL+"/api/todos/getAllTodos"
   ).then((res) => res.json()).then(
     (todos)=>{
       waitingTodos.innerHTML = "";
