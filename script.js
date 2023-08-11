@@ -51,7 +51,7 @@ async function changeTodo(id,title){
     },
     body : JSON.stringify(newTodo)
   }).then(todoInput.value = "").then(orderAfterFetch)
-  socket.emit("message","asd")
+  
 }
 
 async function deleteTodo(id){
@@ -66,7 +66,7 @@ async function deleteTodo(id){
       'Content-Type': 'application/json'
     },
   }).then(todoInput.value = "").then(orderAfterFetch)
-  socket.emit("message","asd")
+  
 }
 
 async function setFinishedTodo(id){
@@ -84,7 +84,7 @@ async function setFinishedTodo(id){
     },
     body : JSON.stringify(newTodoo)
   }).then(todoInput.value = "").then(orderAfterFetch)
-  socket.emit('message',"asdasd")
+ 
 }
 
 async function createTodo(){
@@ -101,7 +101,7 @@ async function createTodo(){
     },
     body : JSON.stringify(newTodo)
   }).then(todoInput.value = "").then(orderAfterFetch)
-  socket.emit("message","asd")
+  
 }
 
 async function orderAfterFetch() {
@@ -161,6 +161,3 @@ async function orderAfterFetch() {
 
 orderAfterFetch()
 
-socket.on('message',(text)=>{
-orderAfterFetch()
-})
