@@ -2,7 +2,8 @@ const todoInput = document.querySelector(".added-todo").querySelector("input");
 const todoAddButton = document.querySelector(".added-confirm");
 const waitingTodos = document.querySelector(".todos");
 const finishedTodos = document.querySelector(".finished-todos");
-const socket=io('ws://todolist-backend-odq2.onrender.com')
+const socket=io('https://todolist-backend-odq2.onrender.com/')
+
 let newTodos;
 let newTodosFinishedButton;
 let newTodosDeleteButton;
