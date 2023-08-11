@@ -7,7 +7,7 @@ let newTodos;
 let newTodosFinishedButton;
 let newTodosDeleteButton;
 let finishedTodosInput;
-const API_URL="https://todolist-backend-odq2.onrender.com"
+
 todoAddButton.addEventListener("click", newTodoAdd);
 
 document.querySelector(".add-todo").addEventListener("keypress", (e) => {
@@ -29,11 +29,14 @@ if (localStorage.getItem("todosId") == 0) {
 
 }
 
+
+
+
 function newTodoAdd() {
   if (todoInput.value != "") {
     createTodo()
-  }
 
+  }
 }
 
 async function changeTodo(id,title){
@@ -42,7 +45,7 @@ async function changeTodo(id,title){
   }
   console.log(JSON.stringify(newTodo))
   await fetch(
-    API_URL+"/api/todos/changeTodo/"+id
+    "https://todolist-backend-odq2.onrender.com/api/todos/changeTodo/"+id
   ,{
     method:"PUT",
     headers:{          
@@ -51,14 +54,14 @@ async function changeTodo(id,title){
     },
     body : JSON.stringify(newTodo)
   }).then(todoInput.value = "").then(orderAfterFetch)
-  
+
 }
 
 async function deleteTodo(id){
 
 
   await fetch(
-    API_URL+"/api/todos/deleteTodo/"+id
+    "https://todolist-backend-odq2.onrender.com/api/todos/deleteTodo/"+id
   ,{
     method:"DELETE",
     headers:{          
@@ -66,7 +69,7 @@ async function deleteTodo(id){
       'Content-Type': 'application/json'
     },
   }).then(todoInput.value = "").then(orderAfterFetch)
-  
+
 }
 
 async function setFinishedTodo(id){
@@ -75,7 +78,7 @@ async function setFinishedTodo(id){
   }
  
   await fetch(
-    API_URL+"/api/todos/changeTodo/"+id
+    "https://todolist-backend-odq2.onrender.com/api/todos/changeTodo/"+id
   ,{
     method:"PUT",
     headers:{          
@@ -84,7 +87,7 @@ async function setFinishedTodo(id){
     },
     body : JSON.stringify(newTodoo)
   }).then(todoInput.value = "").then(orderAfterFetch)
- 
+
 }
 
 async function createTodo(){
@@ -92,7 +95,7 @@ async function createTodo(){
     title:todoInput.value,
   }
   await fetch(
-    API_URL+"/api/todos/createTodo"
+    "https://todolist-backend-odq2.onrender.com/api/todos/createTodo"
   ,{
     method:"POST",
     headers:{          
@@ -101,12 +104,12 @@ async function createTodo(){
     },
     body : JSON.stringify(newTodo)
   }).then(todoInput.value = "").then(orderAfterFetch)
-  
+
 }
 
 async function orderAfterFetch() {
   await fetch(
-    API_URL+"/api/todos/getAllTodos"
+    "https://todolist-backend-odq2.onrender.com/api/todos/getAllTodos"
   ).then((res) => res.json()).then(
     (todos)=>{
       waitingTodos.innerHTML = "";
@@ -157,7 +160,10 @@ async function orderAfterFetch() {
     
   );
 
+
+ 
+
+
 }
 
 orderAfterFetch()
-
