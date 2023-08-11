@@ -3,6 +3,8 @@ const todoAddButton = document.querySelector(".added-confirm");
 const waitingTodos = document.querySelector(".todos");
 const finishedTodos = document.querySelector(".finished-todos");
 
+const API_URL="https://xerus-sweatsuit.cyclic.app"
+
 let newTodos;
 let newTodosFinishedButton;
 let newTodosDeleteButton;
@@ -45,7 +47,7 @@ async function changeTodo(id,title){
   }
   console.log(JSON.stringify(newTodo))
   await fetch(
-    "https://todolist-backend-odq2.onrender.com/api/todos/changeTodo/"+id
+    API_URL+"/api/todos/changeTodo/"+id
   ,{
     method:"PUT",
     headers:{          
@@ -61,7 +63,7 @@ async function deleteTodo(id){
 
 
   await fetch(
-    "https://todolist-backend-odq2.onrender.com/api/todos/deleteTodo/"+id
+    API_URL+"/api/todos/deleteTodo/"+id
   ,{
     method:"DELETE",
     headers:{          
@@ -78,7 +80,7 @@ async function setFinishedTodo(id){
   }
  
   await fetch(
-    "https://todolist-backend-odq2.onrender.com/api/todos/changeTodo/"+id
+    API_URL+"/api/todos/changeTodo/"+id
   ,{
     method:"PUT",
     headers:{          
@@ -95,7 +97,7 @@ async function createTodo(){
     title:todoInput.value,
   }
   await fetch(
-    "https://todolist-backend-odq2.onrender.com/api/todos/createTodo"
+    API_URL+"/api/todos/createTodo"
   ,{
     method:"POST",
     headers:{          
@@ -109,7 +111,7 @@ async function createTodo(){
 
 async function orderAfterFetch() {
   await fetch(
-    "https://todolist-backend-odq2.onrender.com/api/todos/getAllTodos"
+    API_URL+"/api/todos/getAllTodos"
   ).then((res) => res.json()).then(
     (todos)=>{
       waitingTodos.innerHTML = "";
