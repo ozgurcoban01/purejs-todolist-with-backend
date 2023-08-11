@@ -2,6 +2,7 @@ const todoInput = document.querySelector(".added-todo").querySelector("input");
 const todoAddButton = document.querySelector(".added-confirm");
 const waitingTodos = document.querySelector(".todos");
 const finishedTodos = document.querySelector(".finished-todos");
+const socket=io("https://todolist-backend-odq2.onrender.com")
 
 let newTodos;
 let newTodosFinishedButton;
@@ -54,7 +55,7 @@ async function changeTodo(id,title){
     },
     body : JSON.stringify(newTodo)
   }).then(todoInput.value = "").then(orderAfterFetch)
-
+  
 }
 
 async function deleteTodo(id){
@@ -87,7 +88,7 @@ async function setFinishedTodo(id){
     },
     body : JSON.stringify(newTodoo)
   }).then(todoInput.value = "").then(orderAfterFetch)
-
+  socket.emit('message',"asfasd")
 }
 
 async function createTodo(){
@@ -167,3 +168,7 @@ async function orderAfterFetch() {
 }
 
 orderAfterFetch()
+
+socket.on('message',(text)=>{
+console.log(text)
+})
