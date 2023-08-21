@@ -3,7 +3,7 @@ const todoAddButton = document.querySelector(".added-confirm");
 const waitingTodos = document.querySelector(".todos");
 const finishedTodos = document.querySelector(".finished-todos");
 
-const API_URL="https://xerus-sweatsuit.cyclic.app"
+const API_URL="https://todolist-backend-odq2.onrender.com"
 
 let newTodos;
 let newTodosFinishedButton;
